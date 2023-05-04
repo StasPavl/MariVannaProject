@@ -1,0 +1,40 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-wrapper {
+    display: flex;
+    height: 100%;
+}
+
+.sidebar {
+    /* sidebar styles */
+}
+
+.dashboard-main-wrapper {
+    flex: 1;
+    height: 100%;
+    min-height: 100%;
+    /* other styles */
+}
+.table {
+    display: table;
+    width: 100%;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    padding: 10px;
+    border: 1px solid black;
+}
+.table-container {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
