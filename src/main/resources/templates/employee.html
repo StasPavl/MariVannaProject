@@ -1,5 +1,5 @@
 <!doctype html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -23,19 +23,19 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="index.html" class="nav-link text-white" aria-current="page">
+                <a th:href="@{/home}" class="nav-link text-white" aria-current="page">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="templates/Home_page/index.html"></use></svg>
                     Home
                 </a>
             </li>
             <li>
-                <a href="employee.html" class="nav-link text-white">
+                <a th:href="@{/employee}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                     Employee
                 </a>
             </li>
             <li>
-                <a href="archive.html" class="nav-link text-white">
+                <a th:href="@{/archive}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
                     Employee Archive
                 </a>
@@ -50,11 +50,11 @@
         <!--Header-->
         <header class="p-3 text-bg-dark">
             <div class="container">
-                <header class="d-flex justify-content-center py-3">
+                <div class="d-flex justify-content-center py-3">
                     <ul class="nav nav-pills">
                         <h2>Create Employee</h2>
                     </ul>
-                </header>
+                </div>
             </div>
         </header>
         <!--    FORM    -->
@@ -62,80 +62,73 @@
             <div class="form-center">
                 <div class="container-sm " >
                     <div class="jumbotron">
-                        <form>
+                        <form th:object="${employee}" th:action="@{/employee/create}" method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">First Name</label>
-                                    <input type="text" class="form-control" id="inputEmail4">
+                                    <input th:field="*{firstName}" type="text" class="form-control" id="inputEmail4">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputPassword4">Last Name</label>
-                                    <input type="text" class="form-control" id="inputPassword4">
+                                    <input th:field="*{lastName}" type="text" class="form-control" id="inputPassword4">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Phone Number</label>
-                                    <input type="number" class="form-control" id="inputPhone">
+                                    <input th:field="*{phoneNumber}" type="number" class="form-control" id="inputPhone">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputPassword4">Email</label>
-                                    <input type="text" class="form-control" id="inputEmail">
+                                    <input th:field="*{email}" type="text" class="form-control" id="inputEmail">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">SSN Number</label>
-                                    <input type="text" class="form-control" id="inputssn">
+                                    <input th:field="*{SSN}" type="text" class="form-control" id="inputssn">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputPassword4">Birth Day</label>
-                                    <input type="date" class="form-control" id="inputBirthDay">
+                                    <input th:field="*{birthDay}" type="date" class="form-control" id="inputBirthDay">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Start Day</label>
-                                    <input type="date" class="form-control" id="startDay">
+                                    <input th:field="*{startDate}" type="date" class="form-control" id="startDay">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputState">Position</label>
-                                    <select id="position" class="form-control">
-                                        <option selected>Choose...</option>
-                                        <option>Bartender</option>
-                                        <option>Server</option>
-                                        <option>Manager</option>
-                                        <option>Dishwasher</option>
-                                        <option>Busser</option>
-                                        <option>Runner</option>
-                                        <option>Chef</option>
-                                        <option>Cook</option>
+                                    <label for="inputState">Role</label>
+                                    <select th:field="*{role}" id="position" class="form-control">
+                                        <option th:value="''"  th:text="Select"></option>
+                                        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.description}"></option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                <input th:field="*{address}" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress2">Address 2</label>
-                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                <input th:field="*{address2}" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputCity">City</label>
-                                    <input type="text" class="form-control" id="inputCity">
+                                    <input th:field="*{city}" type="text" class="form-control" id="inputCity">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputState">State</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>Choose...</option>
-                                        <option>...</option>
+                                    <select th:field="*{state}" id="inputState" class="form-control">
+                                        <option th:value="''" th:text="Select"></option>
+                                        <option th:each="state : ${stateList}" th:value="${state}" th:text="${state.values}"></option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="inputZip">Zip</label>
-                                    <input type="text" class="form-control" id="inputZip">
+                                    <input th:field="*{zipCode}" type="text" class="form-control" id="inputZip">
                                 </div>
                             </div>
 

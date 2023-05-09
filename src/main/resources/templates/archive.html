@@ -1,4 +1,6 @@
 <!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
 
@@ -22,19 +24,19 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="index.html" class="nav-link text-white" aria-current="page">
+                <a th:href="@{/home}" class="nav-link text-white" aria-current="page">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="templates/Home_page/index.html"></use></svg>
                     Home
                 </a>
             </li>
             <li>
-                <a href="employee.html" class="nav-link text-white">
+                <a th:href="@{/employee}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                     Employee
                 </a>
             </li>
             <li>
-                <a href="archive.html" class="nav-link text-white">
+                <a th:href="@{/archive}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
                     Employee Archive
                 </a>
@@ -77,23 +79,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td >Stanislav</td>
-                    <td >Pavlovskyi</td>
-                    <td>3014331866</td>
-                    <td>lichfb@gmail.com</td>
-                    <td>891405050</td>
-                    <td>02/10/1993</td>
-                    <td>12/06/2015</td>
-                    <td>Bartender</td>
-                    <td>1221 N Pierce str</td>
-                    <td>Apt 329</td>
-                    <td>Arlington</td>
-                    <td>VA</td>
-                    <td>22209</td>
+                <tr th:each="employee : ${employeeList}">
+                    <td th:text="${employee.firstName}" ></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.phoneNumber}"></td>
+                    <td th:text="${employee.email}"></td>
+                    <td th:text="${employee.SSN}"> </td>
+                    <td th:text="${employee.birthDay}"></td>
+                    <td th:text="${employee.startDate}"></td>
+                    <td th:text="${employee.role.description}"></td>
+                    <td th:text="${employee.address}"> </td>
+                    <td th:text="${employee.address2}"></td>
+                    <td th:text="${employee.city}"></td>
+                    <td th:text="${employee.state.toString()}"></td>
+                    <td th:text="${employee.zipCode}"></td>
                     <td class="actions">
                         <a href="update.html"><button type="button" class="btn btn-warning btn-sm">Update</button></a>
-                        <a th:href="" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
+                        <a href="" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
                     </td>
                 </tr>
 
